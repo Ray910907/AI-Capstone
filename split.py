@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 from glob import glob
 #Split images into 2 or 4 pieces
-def segment_images(input_dir, output_pieces_dir, mode):
+def segment_images(input_dir, mode):
     """
     Split images into 2 or 4 pieces
     mode = 2: Left and right halves
@@ -11,8 +11,10 @@ def segment_images(input_dir, output_pieces_dir, mode):
     """
     #Set output directories,we use two/four different labels to represent the position of the photo pieces
     if mode == "sides":
+        output_pieces_dir = "puzzle_pieces2"
         regions = ["left", "right"]
     elif mode == "corners":
+        output_pieces_dir = "puzzle_pieces4"
         regions = ["top_left", "bottom_left", "top_right", "bottom_right"]
     else:
         raise ValueError("Mode must be 'corners' or 'sides'")
@@ -55,7 +57,6 @@ def segment_images(input_dir, output_pieces_dir, mode):
 
 #Input dir of the puzzle pieces then Enter the mode to represent the pieces of puzzle
 input_dir = "dataset"
-output_pieces_dir = "puzzle_pieces"
 mode = input("Enter segmentation mode (sides: Left and right halves, corners: Four quadrants): ")
 
-segment_images(input_dir, output_pieces_dir, mode)
+segment_images(input_dir, mode)
